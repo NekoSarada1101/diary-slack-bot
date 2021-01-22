@@ -1,10 +1,10 @@
 from google.oauth2 import service_account
 
 SLACK_WEBHOOK_URL = "SLACK_WEBHOOK_URL"
-GMAIL_LIST = [
-    "GMAIL_LIST_1",
-    "GMAIL_LIST_2",
-    "GMAIL_LIST_3",
+CALENDAR_ID_LIST = [
+    "CALENDAR_ID_LIST_1",
+    "CALENDAR_ID_LIST_2",
+    "CALENDAR_ID_LIST_3",
     ...
 ]
 OPEN_WEATHER_API_KEY = "OPEN_WEATHER_API_KEY"
