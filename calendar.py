@@ -11,15 +11,11 @@ service = googleapiclient.discovery.build('calendar', 'v3', credentials=CREDENTI
 today = datetime.now(timezone(timedelta(hours=+9), 'JST'))
 
 
-def do_post():
-    post_calendar()
-
-
 def post_calendar():
     calendar_event = []  # type: List[str]
     for calendar_id in CALENDAR_ID_LIST:
         calendar_event.append(fetch_events(calendar_id))
-    data = calendar_json(calendar_event, today.strftime("%m月%d日"))  # type: dict
+    data = calendar_json(calendar_event)  # type: dict
     print(data)
     json_data = json.dumps(data).encode("utf-8")  # type: json
     response = requests.post(SLACK_WEBHOOK_URL, json_data)  # type: response
@@ -57,7 +53,7 @@ def fetch_events(calendar_id: str) -> str:
     return list_text
 
 
-def calendar_json(calendar_data: List[str], today: str) -> dict:
+def calendar_json(calendar_data: List[str]) -> dict:
     summary_list = []  # type: List[str]
     for calendar_id in CALENDAR_ID_LIST:
         calendar = service.calendars().get(calendarId=calendar_id).execute()  # type: dict
@@ -76,7 +72,7 @@ def calendar_json(calendar_data: List[str], today: str) -> dict:
 
     data = {  # type: dict
         "response_type": "ephemeral",
-        "text": today + "の予定をお知らせします。",
+        "text": today.strftime("%m月%d日") + "の予定をお知らせします。",
         "attachments":
             attachments
     }
