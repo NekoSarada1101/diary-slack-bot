@@ -1,10 +1,8 @@
 import json
-
 import googleapiclient.discovery
 import requests
 from datetime import datetime, timedelta, timezone
 from typing import List
-
 from settings import *
 
 service = googleapiclient.discovery.build('calendar', 'v3', credentials=CREDENTIALS)
@@ -18,7 +16,7 @@ def post_calendar():
     data = calendar_json(calendar_event)  # type: dict
     print(data)
     json_data = json.dumps(data).encode("utf-8")  # type: json
-    response = requests.post(SLACK_WEBHOOK_URL, json_data)  # type: response
+    response = requests.post(SLACK_WEBHOOK_URL, json_data)
     print(response)
 
 
