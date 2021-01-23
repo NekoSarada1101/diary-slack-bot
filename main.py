@@ -1,8 +1,10 @@
-import diary
+from google_calendar import *
+from weather import *
 
 
 def main():
-    diary.do_post()
+    post_calendar()
+    post_weather()
 
 
 if __name__ == "__main__":
